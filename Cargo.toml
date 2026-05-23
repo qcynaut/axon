@@ -1,0 +1,10 @@
+[workspace]
+resolver = "3"
+members = []
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+readme = "README.md"
+repository = "https://github.com/qcynaut/axon"
+license = "Apache-2.0 or MIT"
