@@ -1,0 +1,9 @@
+[package]
+name = "axon-core"
+version.workspace = true
+edition.workspace = true
+readme.workspace = true
+repository.workspace = true
+license.workspace = true
+
+[dependencies]
