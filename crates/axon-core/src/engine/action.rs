@@ -133,6 +133,52 @@ pub enum EngineAction {
         data: Option<MsgpackValue>,
     },
 
+    /// Peer sent a WebRTC SDP offer; caller must feed it to the WebRTC stack.
+    SdpOfferReceived {
+        /// SDP offer body.
+        sdp: String,
+    },
+
+    /// Peer sent a WebRTC SDP answer; caller must apply it to the WebRTC stack.
+    SdpAnswerReceived {
+        /// SDP answer body.
+        sdp: String,
+    },
+
+    /// Peer sent an ICE candidate; caller must add it to the WebRTC peer connection.
+    IceCandidateReceived {
+        /// ICE candidate string.
+        candidate: String,
+        /// SDP media stream identification.
+        sdp_mid: Option<String>,
+        /// SDP media line index.
+        sdp_mline_index: Option<u16>,
+        /// ICE username fragment.
+        username_fragment: Option<String>,
+    },
+
+    /// Server sent `PIPELINE_READY`; caller must verify data channels and
+    /// prepare for `SESSION_READY`.
+    PipelineReadyReceived {
+        /// Active transport, `"webrtc"` in draft version 0.1.
+        transport: String,
+        /// Established Axon Data Channels.
+        data_channels: Vec<String>,
+        /// Established media tracks, when present.
+        media_tracks: Option<Vec<String>>,
+    },
+
+    /// Pipeline has been recovered/renegotiated; caller must switch traffic
+    /// back to Pipeline.
+    PipelineRecovered {
+        /// Active transport, `"webrtc"` in draft version 0.1.
+        transport: String,
+        /// Established Axon Data Channels.
+        data_channels: Vec<String>,
+        /// Established media tracks, when present.
+        media_tracks: Option<Vec<String>>,
+    },
+
     // -----------------------------------------------------------------------
     // Both roles
     // -----------------------------------------------------------------------
@@ -151,6 +197,17 @@ pub enum EngineAction {
         frame_id: u32,
         /// Whether the sender requires an acknowledgement.
         ack_required: bool,
+    },
+
+    /// All retransmissions were exhausted for an `EVENT` with `ACK_REQ`.
+    /// The session remains open.
+    EventDeliveryFailed {
+        /// Event topic.
+        topic: String,
+        /// Event sequence number.
+        seq: u64,
+        /// Frame ID of the original `EVENT`.
+        original_frame_id: u32,
     },
 
     /// The session is fully established and ready for application traffic.

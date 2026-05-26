@@ -34,7 +34,8 @@ pub mod session;
 pub use capability::Capabilities;
 pub use codec::{decode_frame, encode_frame};
 pub use engine::{
-    AxonEngine, EngineConfig, IceCandidateOptions, RpcRequestOptions,
+    AxonEngine, EngineConfig, IceCandidateOptions, IdempotencyRecord, IdempotencyResult,
+    PendingAckEvent, ResumableState, RpcRequestOptions,
     action::{CarrierId, EngineAction, PendingRpc},
     traits::{AxonClientSession, AxonServerHandler, ControlPlane, PipelineDataChannel},
 };
