@@ -43,7 +43,9 @@
           shellHook = ''
             if [ -z "$NIX_FISH_SHELL" ]; then
               export NIX_FISH_SHELL=1
-              exec ${pkgs.fish}/bin/fish
+              case "$-" in
+                *i*) exec ${pkgs.fish}/bin/fish ;;
+              esac
             fi
           '';
         };
