@@ -5,5 +5,20 @@ edition.workspace = true
 readme.workspace = true
 repository.workspace = true
 license.workspace = true
+description = "Core protocol types, codec, Sans-I/O engine, and trait contracts for the Axon protocol"
+
+[lints]
+workspace = true
 
 [dependencies]
+serde = { workspace = true }
+rmp-serde = { workspace = true }
+rmpv = { workspace = true }
+serde_bytes = { workspace = true }
+bytes = { workspace = true }
+thiserror = { workspace = true }
+bitflags = { workspace = true }
+futures = { workspace = true }
+
+[dev-dependencies]
+hex = "0.4"

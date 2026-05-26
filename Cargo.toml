@@ -8,3 +8,31 @@ edition = "2024"
 readme = "README.md"
 repository = "https://github.com/qcynaut/axon"
 license = "Apache-2.0 or MIT"
+
+[workspace.dependencies]
+# Serialization
+serde = { version = "1", features = ["derive"] }
+rmp-serde = "1"
+rmpv = { version = "1", features = ["with-serde"] }
+serde_bytes = "0.11"
+# Zero-copy byte buffers
+bytes = "1"
+# Error derive
+thiserror = "2"
+# Type-safe bitmask flags
+bitflags = "2"
+# Async utilities (BoxFuture, etc.)
+futures = { version = "0.3", default-features = false, features = ["alloc"] }
+
+[workspace.lints.rust]
+missing_docs = "warn"
+unsafe_code = "deny"
+
+[workspace.lints.clippy]
+cognitive_complexity = "warn"
+too_many_lines = "warn"
+too_many_arguments = "warn"
+struct_excessive_bools = "warn"
+disallowed_methods = "warn"
+disallowed_types = "warn"
+disallowed_macros = "warn"
